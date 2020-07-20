@@ -1,8 +1,6 @@
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -40,18 +38,19 @@ public class Tree {
 	}
 
 	// Create different types of trees
-	public static Image[] getRedWoodImg() {
+	public Image[] getRedWoodImg() {
 		if (redWoodRender == true) {
 			try {
 				if (treeRenderOncecounter == 0) {
 					for (int i = 0; i < 3; i++) {
-						redWood[i] = ImageIO.read(new File("Red Wood.png"));
+						redWood[i] = ImageIO.read(getClass().getClassLoader().getResource("Red Wood.png"));
 					}
 					treeRenderOncecounter++;
 				}
 				
 				if (Draw.isKeyPressedI) {
-					redWood[Draw.needToCutTreeNumber] = ImageIO.read(new File("Red Wood #" + stage[Draw.needToCutTreeNumber] + ".png"));
+					redWood[Draw.needToCutTreeNumber] = ImageIO.read(getClass().getClassLoader().getResource("Red Wood #" + stage[Draw.needToCutTreeNumber] + ".png"));
+					
 					if (stage[Draw.needToCutTreeNumber] < 3) {
 						stage[Draw.needToCutTreeNumber] += 1;
 					}
@@ -61,6 +60,7 @@ public class Tree {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Main.log.info(e.getMessage());
 			}
 			
 			redWoodRender = false;

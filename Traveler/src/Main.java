@@ -30,19 +30,19 @@ class Draw extends JPanel {
 
 	public static boolean isBackgroundRenderNeeded = true;
 
+	private static Player player = new Player();
+
 	public void onScreen(Graphics g) {
 		g.drawImage(Background.backgroundImage(), 0, 0, null);
 
 		// Adding the player to the game!
 		if (isLeft == true) {
-			g.drawImage(Player.playerImage()[0], x, y, null);
+			g.drawImage(player.playerImage()[0], x, y, null);
 		} else {
-			g.drawImage(Player.playerImage()[1], x, y, null);
+			g.drawImage(player.playerImage()[1], x, y, null);
 		}
 
 		g.drawString("X: " + x + " Y: " + y, 10, 10);
-
-		// System.gc();
 
 		if (treeCuttingLine == true) {
 			// After the tree cutting ends, the backgroundRenderNeeded should be false!
@@ -57,7 +57,7 @@ class Draw extends JPanel {
 		if (isBackgroundRenderNeeded == true) {
 			if (isKeyPressedI == true) {
 				Tree.redWoodRender = true;
-				Tree.getRedWoodImg();
+				Background.tree.getRedWoodImg();
 				isKeyPressedI = false;
 			}
 			Background.backgroundImageRender(g);
@@ -80,7 +80,7 @@ public class Main implements KeyListener {
 	private static JFrame frame;
 	private static Draw draw = new Draw();
 
-	private static Logger log;
+	public static Logger log;
 
 	public Main() {
 
@@ -90,6 +90,7 @@ public class Main implements KeyListener {
 				| UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info(e.getMessage());
 		}
 
 		new File("C:\\Traveler\\LocalData").mkdirs();
@@ -98,13 +99,16 @@ public class Main implements KeyListener {
 		log = Logger.getLogger(""); // getlogger!
 		FileHandler handleit = null;
 		try {
-			handleit = new FileHandler("C:\\Traveler\\Log.log");
+			handleit = new FileHandler("C:\\Traveler\\Log.log", true);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info(e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info(e.getMessage());
+
 		}
 		SimpleFormatter formatit = new SimpleFormatter();
 		log.addHandler(handleit);
@@ -172,12 +176,13 @@ public class Main implements KeyListener {
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.info(e1.getMessage());
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_S) {
 			if (Draw.y < 729) {
 				Draw.y += 2;
-			}	
+			}
 			proximitySensor();
 			draw.repaint();
 			try {
@@ -185,6 +190,7 @@ public class Main implements KeyListener {
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.info(e1.getMessage());
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -199,12 +205,13 @@ public class Main implements KeyListener {
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.info(e1.getMessage());
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			if (Draw.x < 842) {
 				Draw.x += 2;
-			}			
+			}
 			proximitySensor();
 			Draw.isLeft = false;
 			draw.repaint();
@@ -213,6 +220,7 @@ public class Main implements KeyListener {
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.info(e1.getMessage());
 			}
 		}
 

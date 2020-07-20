@@ -1,6 +1,5 @@
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,15 +14,15 @@ public class Player {
 
 	private static boolean playerImageRender = true;
 
-	public static Image[] playerImage() {
-
+	public Image[] playerImage() {
 		if (playerImageRender == true) {
 			try {
-				player[0] = ImageIO.read(new File("Left Player Position.png"));
-				player[1] = ImageIO.read(new File("Right Player Position.png"));
+				player[0] = ImageIO.read(getClass().getClassLoader().getResource("Left Player Position.png"));
+				player[1] = ImageIO.read(getClass().getClassLoader().getResource("Right Player Position.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Main.log.info(e.getMessage());
 			}
 			playerImageRender = false;
 		}

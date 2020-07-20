@@ -22,7 +22,10 @@ public class Background {
 	private static int[] hutY = Hut.posY();
 
 	private static int backgroundImgCounter = 0;
-
+	
+	private static Hut hut = new Hut();
+	protected static Tree tree = new Tree();
+	
 	public static void backgroundImageRender(Graphics g) {
 
 		if (backgroundImgCounter == 0) {
@@ -38,14 +41,14 @@ public class Background {
 		g.fillRect(0, 0, 900, 800);
 
 		// Adding huts to this game!
-		g.drawImage(Hut.hutImage(), hutX[0], hutY[0], null);
-		g.drawImage(Hut.hutImage(), hutX[1], hutY[1], null);
-		g.drawImage(Hut.hutImage(), hutX[2], hutY[2], null);
+		g.drawImage(hut.hutImage(), hutX[0], hutY[0], null);
+		g.drawImage(hut.hutImage(), hutX[1], hutY[1], null);
+		g.drawImage(hut.hutImage(), hutX[2], hutY[2], null);
 
 		// Adding Trees to the game!
-		g.drawImage(Tree.getRedWoodImg()[0], Tree.getTreeX()[0], Tree.getTreeY()[0], null);
-		g.drawImage(Tree.getRedWoodImg()[1], Tree.getTreeX()[1], Tree.getTreeY()[1], null);
-		g.drawImage(Tree.getRedWoodImg()[2], Tree.getTreeX()[2], Tree.getTreeY()[2], null);
+		g.drawImage(tree.getRedWoodImg()[0], Tree.getTreeX()[0], Tree.getTreeY()[0], null);
+		g.drawImage(tree.getRedWoodImg()[1], Tree.getTreeX()[1], Tree.getTreeY()[1], null);
+		g.drawImage(tree.getRedWoodImg()[2], Tree.getTreeX()[2], Tree.getTreeY()[2], null);
 
 	}
 
@@ -55,10 +58,12 @@ public class Background {
 
 	public static void backgroundImageExport() {
 		try {
-			ImageIO.write(backgroundimg, "png", new File("Background.png"));
+			new File("C:\\Traveler\\Export\\Background.png").mkdirs();
+			ImageIO.write(backgroundimg, "png", new File("C:\\Traveler\\Export\\Background.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Main.log.info(e.getMessage());
 		}
 
 	}

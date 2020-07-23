@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +17,20 @@ public class Background {
 
 	private static BufferedImage backgroundimg;
 
-	private static int[] hutX = Hut.posX();
-	private static int[] hutY = Hut.posY();
-
 	private static int backgroundImgCounter = 0;
-	
+
 	private static Hut hut = new Hut();
 	protected static Tree tree = new Tree();
 	
+	private static BufferedImage moveImage;
+	private static boolean wandererStopped = false;
+	
+	
+
+	public static void setWandererStopped(boolean wandererStopped) {
+		Background.wandererStopped = wandererStopped;
+	}
+
 	public static void backgroundImageRender(Graphics g) {
 
 		if (backgroundImgCounter == 0) {
@@ -41,18 +46,31 @@ public class Background {
 		g.fillRect(0, 0, 900, 800);
 
 		// Adding huts to this game!
-		g.drawImage(hut.hutImage(), hutX[0], hutY[0], null);
-		g.drawImage(hut.hutImage(), hutX[1], hutY[1], null);
-		g.drawImage(hut.hutImage(), hutX[2], hutY[2], null);
+		g.drawImage(hut.hutImage(), Hut.getHutX()[0], Hut.getHutY()[0], null);
+		g.drawImage(hut.hutImage(), Hut.getHutX()[1], Hut.getHutY()[1], null);
+		g.drawImage(hut.hutImage(), Hut.getHutX()[2], Hut.getHutY()[2], null);
 
 		// Adding Trees to the game!
 		g.drawImage(tree.getRedWoodImg()[0], Tree.getTreeX()[0], Tree.getTreeY()[0], null);
 		g.drawImage(tree.getRedWoodImg()[1], Tree.getTreeX()[1], Tree.getTreeY()[1], null);
 		g.drawImage(tree.getRedWoodImg()[2], Tree.getTreeX()[2], Tree.getTreeY()[2], null);
-
+		
+		if (wandererStopped) {
+			System.out.println(true);
+			if (Wanderer.moveWanderNum[0]) {
+				g.drawImage(Main.wanderer.getWandererLeftRendered()[0], Wanderer.getWandererPosX()[0], Wanderer.getWandererPosY()[0], null);
+			}
+			if (Wanderer.moveWanderNum[1]) {
+				g.drawImage(Main.wanderer.getWandererLeftRendered()[1], Wanderer.getWandererPosX()[1], Wanderer.getWandererPosY()[1], null);
+			}
+			if (Wanderer.moveWanderNum[2]) {
+				g.drawImage(Main.wanderer.getWandererLeftRendered()[2], Wanderer.getWandererPosX()[2], Wanderer.getWandererPosY()[2], null);
+			}
+		}
+		
 	}
 
-	public static Image backgroundImage() {
+	public static BufferedImage backgroundImage() {
 		return backgroundimg;
 	}
 

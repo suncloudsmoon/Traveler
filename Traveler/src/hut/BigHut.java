@@ -1,9 +1,10 @@
+package hut;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Hut {
+public class BigHut implements Hut {
 
 	private static BufferedImage hut;
 	private static int[] x = new int[3]; // Access this by x[1] etc
@@ -21,7 +22,7 @@ public class Hut {
 		return hutY;
 	}
 
-	public BufferedImage hutImage() {
+	public BufferedImage getHutImg() {
 		try {
 			hut = ImageIO.read(getClass().getClassLoader().getResource("Hut.png"));
 		} catch (IOException e) {

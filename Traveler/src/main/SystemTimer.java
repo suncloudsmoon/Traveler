@@ -1,28 +1,36 @@
+package main;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
+
+import tree.RedWood;
 
 public class SystemTimer {
 
 	private static Timer tellTime = null;
 	private static boolean timerFinished = false;
 	private static int counter = 0;
-	
-	public boolean getTimer() {
+
+	public boolean isTimerFinished() {
 		return timerFinished;
 	}
 
-	public boolean setTimer(long duration) {
+	public boolean setTimer(int delay, long duration) {
 		ActionListener time = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				counter++;
+				counter += delay;
 				if (counter == duration) {
 					tellTime.stop();
-					timerFinished = true;
+					setTimerFinished(true);
 					counter = 0;
+
+					System.out.println("Timer is up!");
 				}
 
 			}
@@ -30,11 +38,19 @@ public class SystemTimer {
 		};
 
 		if (counter == 0 && !timerFinished) {
-			timerFinished = false;
-			tellTime.setDelay(1000);
+			tellTime = new Timer(delay, time);
+			tellTime.setRepeats(true);
 			tellTime.start();
+
+			setTimerFinished(false);
+
 		}
 
 		return timerFinished;
 	}
+
+	public static void setTimerFinished(boolean timerFinished) {
+		SystemTimer.timerFinished = timerFinished;
+	}
+
 }

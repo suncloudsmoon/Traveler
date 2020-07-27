@@ -1,7 +1,10 @@
+package player;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import mainmenu.MainMenu;
 
 public class Player {
 
@@ -9,7 +12,7 @@ public class Player {
 	public static final int playerPosX = (int) (Math.random() * 855) + 10;
 	public static final int playerPosY = (int) (Math.random() * 730) + 10;
 	
-	public static int playerSpeed = 1;
+	private static int playerSpeed = 5;
 
 	private BufferedImage[] playerImage = playerImageRender();
 
@@ -25,9 +28,17 @@ public class Player {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Main.log.info(e.getMessage());
+			MainMenu.log.info(e.getMessage());
 		}
 
 		return player;
+	}
+
+	public static int getPlayerSpeed() {
+		return playerSpeed;
+	}
+
+	public static void setPlayerSpeed(int playerSpeed) {
+		Player.playerSpeed = playerSpeed;
 	}
 }

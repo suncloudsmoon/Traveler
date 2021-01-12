@@ -1,3 +1,20 @@
+/*
+* Copyright (C) 2020 Ganesha Ajjampura
+* 
+* This program is free software: you can redistribute it and/or modify it under
+* the terms of the GNU General Public License as published by the Free Software
+* Foundation, either version 3 of the License, or (at your option) any later
+* version.
+* 
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+* details.
+* 
+* You should have received a copy of the GNU General Public License along with
+* this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+
 package main;
 
 import java.awt.event.ActionEvent;
@@ -10,6 +27,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -63,7 +81,7 @@ public class Main implements MouseListener, WindowListener {
 	private Action enter;
 
 	public Main() {
-		
+
 		MainMenu.frame.add(draw);
 		MainMenu.frame.addWindowListener(this);
 		MainMenu.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -476,7 +494,7 @@ public class Main implements MouseListener, WindowListener {
 					&& e.getX() <= Wanderer.getWandererX()[Wanderer.wandererSelectedNum] + 20
 					&& e.getY() >= Wanderer.getWandererY()[Wanderer.wandererSelectedNum] - 15
 					&& e.getY() <= Wanderer.getWandererY()[Wanderer.wandererSelectedNum] + 1) {
-				
+
 				Inventory.money += Trade.tradeAmount.getValue();
 				Inventory.item[0] -= Trade.tradeAmount.getValue();
 				Trade.wandererTradeBoxOpen = false;
